@@ -2,7 +2,7 @@
 
 Obsidian plugin that adds context menu options to open files and folders in a terminal.
 
-## Context Menu Options
+## Context menu options
 
 - **Open in default terminal** - Opens the directory in the configured terminal (available on all platforms).
 - **Open in PowerShell** - Opens the directory in PowerShell (available on all platforms with `pwsh` installed; falls back to `powershell` on Windows).
