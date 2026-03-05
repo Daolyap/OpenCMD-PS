@@ -2,8 +2,11 @@ name: Build and release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
+    paths:
+      - "code/**"
+      - "manifest.json"
 
 permissions:
   contents: write
@@ -34,9 +37,14 @@ jobs:
           cp code/manifest.json manifest.json
           cp code/versions.json versions.json
 
+      - name: Get version
+        id: version
+        run: echo "tag=v$(jq -r '.version' manifest.json)" >> $GITHUB_OUTPUT
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
           files: |
             main.js
             manifest.json
