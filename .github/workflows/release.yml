@@ -1,0 +1,43 @@
+name: Build and release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        working-directory: code
+        run: npm install
+
+      - name: Build
+        working-directory: code
+        run: npm run build
+
+      - name: Copy files to root
+        run: |
+          cp code/main.js main.js
+          cp code/manifest.json manifest.json
+          cp code/versions.json versions.json
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            main.js
+            manifest.json
+            versions.json
