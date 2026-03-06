@@ -114,7 +114,7 @@ export default class OpenTermPlugin extends Plugin {
 
 				if (Platform.isWin && this.settings.showCmd) {
 					menu.addItem((item) => {
-						item.setTitle("Open in CMD")
+						item.setTitle("Open in Command Prompt")
 							.setIcon("terminal")
 							.setSection(SECTION_ID)
 							.onClick(() => openInCmd(directory, this.settings));
@@ -170,8 +170,8 @@ class OpenTermSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Show CMD (Windows only)")
-			.setDesc("Show the 'Open in CMD' option in the context menu.")
+			.setName("Show Command Prompt (Windows only)")
+			.setDesc("Show the 'Open in Command Prompt' option in the context menu.")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.showCmd).onChange(async (value) => {
 					this.plugin.settings.showCmd = value;
@@ -195,7 +195,7 @@ class OpenTermSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("CMD executable (Windows)")
+			.setName("Command Prompt executable (Windows)")
 			.setDesc("Executable for Command Prompt on Windows.")
 			.addText((text) =>
 				text
